@@ -37,6 +37,7 @@ import { Route as PartnerCloudRouteImport } from './routes/partner.cloud'
 import { Route as PartnerProductionRouteImport } from './routes/partner.production'
 import { Route as PartnerWebDesignerRouteImport } from './routes/partner.web-designer'
 import { Route as RestaurantSlugRouteImport } from './routes/restaurant.$slug'
+import { Route as PartnerProductionIndexRouteImport } from './routes/partner.production.index'
 import { Route as PartnerProductionStore_idMenuRouteImport } from './routes/partner.production.$store_id.menu'
 
 const IndexRoute = IndexRouteImport.update({
@@ -179,6 +180,11 @@ const RestaurantSlugRoute = RestaurantSlugRouteImport.update({
   path: '/restaurant/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnerProductionIndexRoute = PartnerProductionIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PartnerProductionRoute,
+} as any)
 const PartnerProductionStore_idMenuRoute =
   PartnerProductionStore_idMenuRouteImport.update({
     id: '/$store_id/menu',
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/partner/production': typeof PartnerProductionRouteWithChildren
   '/partner/web-designer': typeof PartnerWebDesignerRoute
   '/restaurant/$slug': typeof RestaurantSlugRoute
+  '/partner/production/': typeof PartnerProductionIndexRoute
   '/partner/production/$store_id/menu': typeof PartnerProductionStore_idMenuRoute
 }
 export interface FileRoutesByTo {
@@ -243,9 +250,9 @@ export interface FileRoutesByTo {
   '/partner/ads-manager': typeof PartnerAdsManagerRoute
   '/partner/ai-builder': typeof PartnerAiBuilderRoute
   '/partner/cloud': typeof PartnerCloudRoute
-  '/partner/production': typeof PartnerProductionRouteWithChildren
   '/partner/web-designer': typeof PartnerWebDesignerRoute
   '/restaurant/$slug': typeof RestaurantSlugRoute
+  '/partner/production': typeof PartnerProductionIndexRoute
   '/partner/production/$store_id/menu': typeof PartnerProductionStore_idMenuRoute
 }
 export interface FileRoutesById {
@@ -278,6 +285,7 @@ export interface FileRoutesById {
   '/partner/production': typeof PartnerProductionRouteWithChildren
   '/partner/web-designer': typeof PartnerWebDesignerRoute
   '/restaurant/$slug': typeof RestaurantSlugRoute
+  '/partner/production/': typeof PartnerProductionIndexRoute
   '/partner/production/$store_id/menu': typeof PartnerProductionStore_idMenuRoute
 }
 export interface FileRouteTypes {
@@ -311,6 +319,7 @@ export interface FileRouteTypes {
     | '/partner/production'
     | '/partner/web-designer'
     | '/restaurant/$slug'
+    | '/partner/production/'
     | '/partner/production/$store_id/menu'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -339,9 +348,9 @@ export interface FileRouteTypes {
     | '/partner/ads-manager'
     | '/partner/ai-builder'
     | '/partner/cloud'
-    | '/partner/production'
     | '/partner/web-designer'
     | '/restaurant/$slug'
+    | '/partner/production'
     | '/partner/production/$store_id/menu'
   id:
     | '__root__'
@@ -373,6 +382,7 @@ export interface FileRouteTypes {
     | '/partner/production'
     | '/partner/web-designer'
     | '/restaurant/$slug'
+    | '/partner/production/'
     | '/partner/production/$store_id/menu'
   fileRoutesById: FileRoutesById
 }
@@ -605,6 +615,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RestaurantSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partner/production/': {
+      id: '/partner/production/'
+      path: '/'
+      fullPath: '/partner/production/'
+      preLoaderRoute: typeof PartnerProductionIndexRouteImport
+      parentRoute: typeof PartnerProductionRoute
+    }
     '/partner/production/$store_id/menu': {
       id: '/partner/production/$store_id/menu'
       path: '/$store_id/menu'
@@ -616,10 +633,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface PartnerProductionRouteChildren {
+  PartnerProductionIndexRoute: typeof PartnerProductionIndexRoute
   PartnerProductionStore_idMenuRoute: typeof PartnerProductionStore_idMenuRoute
 }
 
 const PartnerProductionRouteChildren: PartnerProductionRouteChildren = {
+  PartnerProductionIndexRoute: PartnerProductionIndexRoute,
   PartnerProductionStore_idMenuRoute: PartnerProductionStore_idMenuRoute,
 }
 
