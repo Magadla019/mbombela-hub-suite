@@ -1,0 +1,12 @@
+# Mbombela Transfer
+- [x] Import existing project and verify it loads.
+- [x] Add Web Designer, dynamic customer sections and protected save endpoints.
+- [x] Add Production and menu pages without deleting existing records.
+- [x] Add My Cloud tabs and preserve encrypted vault code.
+- [x] Add Marketing Studio drafts with truthful connection status.
+- [x] Add AI Elements chat presentation and split mobile preview.
+- [ ] Verify partner create/read/update/delete and publish flows (blocked: original partner access codes and signing/encryption secret missing).
+- [ ] Restore and verify AI generation, streaming and automatic store/section/ad actions (blocked: original partner credentials and retained AI provider keys missing).
+- [ ] Verify social publishing and R2 storage/upload limits (blocked: provider credentials/account authorization and R2 service configuration missing).
+- [ ] Import original records including Original Smash Burger, users and storage files (blocked: exports missing).
+- [ ] Restore requested ai-proxy/get-keys-status deployments (blocked: original function sources absent from repository).

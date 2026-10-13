@@ -10,33 +10,411 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ClientHomeRouteImport } from './routes/client-home'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DriverControlCenterRouteImport } from './routes/driver-control-center'
+import { Route as DriverDashboardRouteImport } from './routes/driver-dashboard'
+import { Route as DriverHomeRouteImport } from './routes/driver-home'
+import { Route as FoodOrderFormRouteImport } from './routes/food-order-form'
+import { Route as GroceriesRouteImport } from './routes/groceries'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as MessagesRouteImport } from './routes/messages'
+import { Route as OrderHistoryRouteImport } from './routes/order-history'
+import { Route as PartnerDashboardRouteImport } from './routes/partner-dashboard'
+import { Route as PaxiFormRouteImport } from './routes/paxi-form'
+import { Route as PaxiReceiveRouteImport } from './routes/paxi-receive'
+import { Route as PaxiSendRouteImport } from './routes/paxi-send'
+import { Route as PricesRouteImport } from './routes/prices'
+import { Route as ReceiveParcelFormRouteImport } from './routes/receive-parcel-form'
+import { Route as RequestTypeRouteImport } from './routes/request-type'
+import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as SendParcelFormRouteImport } from './routes/send-parcel-form'
+import { Route as TrackOrderRouteImport } from './routes/track-order'
+import { Route as PartnerAdsManagerRouteImport } from './routes/partner.ads-manager'
+import { Route as PartnerAiBuilderRouteImport } from './routes/partner.ai-builder'
+import { Route as PartnerCloudRouteImport } from './routes/partner.cloud'
+import { Route as PartnerProductionRouteImport } from './routes/partner.production'
+import { Route as PartnerWebDesignerRouteImport } from './routes/partner.web-designer'
+import { Route as RestaurantSlugRouteImport } from './routes/restaurant.$slug'
+import { Route as PartnerProductionIndexRouteImport } from './routes/partner.production.index'
+import { Route as PartnerProductionStore_idMenuRouteImport } from './routes/partner.production.$store_id.menu'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientHomeRoute = ClientHomeRouteImport.update({
+  id: '/client-home',
+  path: '/client-home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DriverControlCenterRoute = DriverControlCenterRouteImport.update({
+  id: '/driver-control-center',
+  path: '/driver-control-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DriverDashboardRoute = DriverDashboardRouteImport.update({
+  id: '/driver-dashboard',
+  path: '/driver-dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DriverHomeRoute = DriverHomeRouteImport.update({
+  id: '/driver-home',
+  path: '/driver-home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoodOrderFormRoute = FoodOrderFormRouteImport.update({
+  id: '/food-order-form',
+  path: '/food-order-form',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GroceriesRoute = GroceriesRouteImport.update({
+  id: '/groceries',
+  path: '/groceries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesRoute = MessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderHistoryRoute = OrderHistoryRouteImport.update({
+  id: '/order-history',
+  path: '/order-history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerDashboardRoute = PartnerDashboardRouteImport.update({
+  id: '/partner-dashboard',
+  path: '/partner-dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaxiFormRoute = PaxiFormRouteImport.update({
+  id: '/paxi-form',
+  path: '/paxi-form',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaxiReceiveRoute = PaxiReceiveRouteImport.update({
+  id: '/paxi-receive',
+  path: '/paxi-receive',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaxiSendRoute = PaxiSendRouteImport.update({
+  id: '/paxi-send',
+  path: '/paxi-send',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricesRoute = PricesRouteImport.update({
+  id: '/prices',
+  path: '/prices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReceiveParcelFormRoute = ReceiveParcelFormRouteImport.update({
+  id: '/receive-parcel-form',
+  path: '/receive-parcel-form',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestTypeRoute = RequestTypeRouteImport.update({
+  id: '/request-type',
+  path: '/request-type',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SendParcelFormRoute = SendParcelFormRouteImport.update({
+  id: '/send-parcel-form',
+  path: '/send-parcel-form',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrackOrderRoute = TrackOrderRouteImport.update({
+  id: '/track-order',
+  path: '/track-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerAdsManagerRoute = PartnerAdsManagerRouteImport.update({
+  id: '/partner/ads-manager',
+  path: '/partner/ads-manager',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerAiBuilderRoute = PartnerAiBuilderRouteImport.update({
+  id: '/partner/ai-builder',
+  path: '/partner/ai-builder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerCloudRoute = PartnerCloudRouteImport.update({
+  id: '/partner/cloud',
+  path: '/partner/cloud',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerProductionRoute = PartnerProductionRouteImport.update({
+  id: '/partner/production',
+  path: '/partner/production',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerWebDesignerRoute = PartnerWebDesignerRouteImport.update({
+  id: '/partner/web-designer',
+  path: '/partner/web-designer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RestaurantSlugRoute = RestaurantSlugRouteImport.update({
+  id: '/restaurant/$slug',
+  path: '/restaurant/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerProductionIndexRoute = PartnerProductionIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PartnerProductionRoute,
+} as any)
+const PartnerProductionStore_idMenuRoute =
+  PartnerProductionStore_idMenuRouteImport.update({
+    id: '/$store_id/menu',
+    path: '/$store_id/menu',
+    getParentRoute: () => PartnerProductionRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/client-home': typeof ClientHomeRoute
+  '/dashboard': typeof DashboardRoute
+  '/driver-control-center': typeof DriverControlCenterRoute
+  '/driver-dashboard': typeof DriverDashboardRoute
+  '/driver-home': typeof DriverHomeRoute
+  '/food-order-form': typeof FoodOrderFormRoute
+  '/groceries': typeof GroceriesRoute
+  '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
+  '/order-history': typeof OrderHistoryRoute
+  '/partner-dashboard': typeof PartnerDashboardRoute
+  '/paxi-form': typeof PaxiFormRoute
+  '/paxi-receive': typeof PaxiReceiveRoute
+  '/paxi-send': typeof PaxiSendRoute
+  '/prices': typeof PricesRoute
+  '/receive-parcel-form': typeof ReceiveParcelFormRoute
+  '/request-type': typeof RequestTypeRoute
+  '/reviews': typeof ReviewsRoute
+  '/send-parcel-form': typeof SendParcelFormRoute
+  '/track-order': typeof TrackOrderRoute
+  '/partner/ads-manager': typeof PartnerAdsManagerRoute
+  '/partner/ai-builder': typeof PartnerAiBuilderRoute
+  '/partner/cloud': typeof PartnerCloudRoute
+  '/partner/production': typeof PartnerProductionRouteWithChildren
+  '/partner/web-designer': typeof PartnerWebDesignerRoute
+  '/restaurant/$slug': typeof RestaurantSlugRoute
+  '/partner/production/': typeof PartnerProductionIndexRoute
+  '/partner/production/$store_id/menu': typeof PartnerProductionStore_idMenuRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/client-home': typeof ClientHomeRoute
+  '/dashboard': typeof DashboardRoute
+  '/driver-control-center': typeof DriverControlCenterRoute
+  '/driver-dashboard': typeof DriverDashboardRoute
+  '/driver-home': typeof DriverHomeRoute
+  '/food-order-form': typeof FoodOrderFormRoute
+  '/groceries': typeof GroceriesRoute
+  '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
+  '/order-history': typeof OrderHistoryRoute
+  '/partner-dashboard': typeof PartnerDashboardRoute
+  '/paxi-form': typeof PaxiFormRoute
+  '/paxi-receive': typeof PaxiReceiveRoute
+  '/paxi-send': typeof PaxiSendRoute
+  '/prices': typeof PricesRoute
+  '/receive-parcel-form': typeof ReceiveParcelFormRoute
+  '/request-type': typeof RequestTypeRoute
+  '/reviews': typeof ReviewsRoute
+  '/send-parcel-form': typeof SendParcelFormRoute
+  '/track-order': typeof TrackOrderRoute
+  '/partner/ads-manager': typeof PartnerAdsManagerRoute
+  '/partner/ai-builder': typeof PartnerAiBuilderRoute
+  '/partner/cloud': typeof PartnerCloudRoute
+  '/partner/web-designer': typeof PartnerWebDesignerRoute
+  '/restaurant/$slug': typeof RestaurantSlugRoute
+  '/partner/production': typeof PartnerProductionIndexRoute
+  '/partner/production/$store_id/menu': typeof PartnerProductionStore_idMenuRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/client-home': typeof ClientHomeRoute
+  '/dashboard': typeof DashboardRoute
+  '/driver-control-center': typeof DriverControlCenterRoute
+  '/driver-dashboard': typeof DriverDashboardRoute
+  '/driver-home': typeof DriverHomeRoute
+  '/food-order-form': typeof FoodOrderFormRoute
+  '/groceries': typeof GroceriesRoute
+  '/login': typeof LoginRoute
+  '/messages': typeof MessagesRoute
+  '/order-history': typeof OrderHistoryRoute
+  '/partner-dashboard': typeof PartnerDashboardRoute
+  '/paxi-form': typeof PaxiFormRoute
+  '/paxi-receive': typeof PaxiReceiveRoute
+  '/paxi-send': typeof PaxiSendRoute
+  '/prices': typeof PricesRoute
+  '/receive-parcel-form': typeof ReceiveParcelFormRoute
+  '/request-type': typeof RequestTypeRoute
+  '/reviews': typeof ReviewsRoute
+  '/send-parcel-form': typeof SendParcelFormRoute
+  '/track-order': typeof TrackOrderRoute
+  '/partner/ads-manager': typeof PartnerAdsManagerRoute
+  '/partner/ai-builder': typeof PartnerAiBuilderRoute
+  '/partner/cloud': typeof PartnerCloudRoute
+  '/partner/production': typeof PartnerProductionRouteWithChildren
+  '/partner/web-designer': typeof PartnerWebDesignerRoute
+  '/restaurant/$slug': typeof RestaurantSlugRoute
+  '/partner/production/': typeof PartnerProductionIndexRoute
+  '/partner/production/$store_id/menu': typeof PartnerProductionStore_idMenuRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/client-home'
+    | '/dashboard'
+    | '/driver-control-center'
+    | '/driver-dashboard'
+    | '/driver-home'
+    | '/food-order-form'
+    | '/groceries'
+    | '/login'
+    | '/messages'
+    | '/order-history'
+    | '/partner-dashboard'
+    | '/paxi-form'
+    | '/paxi-receive'
+    | '/paxi-send'
+    | '/prices'
+    | '/receive-parcel-form'
+    | '/request-type'
+    | '/reviews'
+    | '/send-parcel-form'
+    | '/track-order'
+    | '/partner/ads-manager'
+    | '/partner/ai-builder'
+    | '/partner/cloud'
+    | '/partner/production'
+    | '/partner/web-designer'
+    | '/restaurant/$slug'
+    | '/partner/production/'
+    | '/partner/production/$store_id/menu'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/client-home'
+    | '/dashboard'
+    | '/driver-control-center'
+    | '/driver-dashboard'
+    | '/driver-home'
+    | '/food-order-form'
+    | '/groceries'
+    | '/login'
+    | '/messages'
+    | '/order-history'
+    | '/partner-dashboard'
+    | '/paxi-form'
+    | '/paxi-receive'
+    | '/paxi-send'
+    | '/prices'
+    | '/receive-parcel-form'
+    | '/request-type'
+    | '/reviews'
+    | '/send-parcel-form'
+    | '/track-order'
+    | '/partner/ads-manager'
+    | '/partner/ai-builder'
+    | '/partner/cloud'
+    | '/partner/web-designer'
+    | '/restaurant/$slug'
+    | '/partner/production'
+    | '/partner/production/$store_id/menu'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/client-home'
+    | '/dashboard'
+    | '/driver-control-center'
+    | '/driver-dashboard'
+    | '/driver-home'
+    | '/food-order-form'
+    | '/groceries'
+    | '/login'
+    | '/messages'
+    | '/order-history'
+    | '/partner-dashboard'
+    | '/paxi-form'
+    | '/paxi-receive'
+    | '/paxi-send'
+    | '/prices'
+    | '/receive-parcel-form'
+    | '/request-type'
+    | '/reviews'
+    | '/send-parcel-form'
+    | '/track-order'
+    | '/partner/ads-manager'
+    | '/partner/ai-builder'
+    | '/partner/cloud'
+    | '/partner/production'
+    | '/partner/web-designer'
+    | '/restaurant/$slug'
+    | '/partner/production/'
+    | '/partner/production/$store_id/menu'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ClientHomeRoute: typeof ClientHomeRoute
+  DashboardRoute: typeof DashboardRoute
+  DriverControlCenterRoute: typeof DriverControlCenterRoute
+  DriverDashboardRoute: typeof DriverDashboardRoute
+  DriverHomeRoute: typeof DriverHomeRoute
+  FoodOrderFormRoute: typeof FoodOrderFormRoute
+  GroceriesRoute: typeof GroceriesRoute
+  LoginRoute: typeof LoginRoute
+  MessagesRoute: typeof MessagesRoute
+  OrderHistoryRoute: typeof OrderHistoryRoute
+  PartnerDashboardRoute: typeof PartnerDashboardRoute
+  PaxiFormRoute: typeof PaxiFormRoute
+  PaxiReceiveRoute: typeof PaxiReceiveRoute
+  PaxiSendRoute: typeof PaxiSendRoute
+  PricesRoute: typeof PricesRoute
+  ReceiveParcelFormRoute: typeof ReceiveParcelFormRoute
+  RequestTypeRoute: typeof RequestTypeRoute
+  ReviewsRoute: typeof ReviewsRoute
+  SendParcelFormRoute: typeof SendParcelFormRoute
+  TrackOrderRoute: typeof TrackOrderRoute
+  PartnerAdsManagerRoute: typeof PartnerAdsManagerRoute
+  PartnerAiBuilderRoute: typeof PartnerAiBuilderRoute
+  PartnerCloudRoute: typeof PartnerCloudRoute
+  PartnerProductionRoute: typeof PartnerProductionRouteWithChildren
+  PartnerWebDesignerRoute: typeof PartnerWebDesignerRoute
+  RestaurantSlugRoute: typeof RestaurantSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +426,254 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/client-home': {
+      id: '/client-home'
+      path: '/client-home'
+      fullPath: '/client-home'
+      preLoaderRoute: typeof ClientHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/driver-control-center': {
+      id: '/driver-control-center'
+      path: '/driver-control-center'
+      fullPath: '/driver-control-center'
+      preLoaderRoute: typeof DriverControlCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/driver-dashboard': {
+      id: '/driver-dashboard'
+      path: '/driver-dashboard'
+      fullPath: '/driver-dashboard'
+      preLoaderRoute: typeof DriverDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/driver-home': {
+      id: '/driver-home'
+      path: '/driver-home'
+      fullPath: '/driver-home'
+      preLoaderRoute: typeof DriverHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/food-order-form': {
+      id: '/food-order-form'
+      path: '/food-order-form'
+      fullPath: '/food-order-form'
+      preLoaderRoute: typeof FoodOrderFormRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/groceries': {
+      id: '/groceries'
+      path: '/groceries'
+      fullPath: '/groceries'
+      preLoaderRoute: typeof GroceriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages': {
+      id: '/messages'
+      path: '/messages'
+      fullPath: '/messages'
+      preLoaderRoute: typeof MessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order-history': {
+      id: '/order-history'
+      path: '/order-history'
+      fullPath: '/order-history'
+      preLoaderRoute: typeof OrderHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner-dashboard': {
+      id: '/partner-dashboard'
+      path: '/partner-dashboard'
+      fullPath: '/partner-dashboard'
+      preLoaderRoute: typeof PartnerDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paxi-form': {
+      id: '/paxi-form'
+      path: '/paxi-form'
+      fullPath: '/paxi-form'
+      preLoaderRoute: typeof PaxiFormRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paxi-receive': {
+      id: '/paxi-receive'
+      path: '/paxi-receive'
+      fullPath: '/paxi-receive'
+      preLoaderRoute: typeof PaxiReceiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paxi-send': {
+      id: '/paxi-send'
+      path: '/paxi-send'
+      fullPath: '/paxi-send'
+      preLoaderRoute: typeof PaxiSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prices': {
+      id: '/prices'
+      path: '/prices'
+      fullPath: '/prices'
+      preLoaderRoute: typeof PricesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/receive-parcel-form': {
+      id: '/receive-parcel-form'
+      path: '/receive-parcel-form'
+      fullPath: '/receive-parcel-form'
+      preLoaderRoute: typeof ReceiveParcelFormRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request-type': {
+      id: '/request-type'
+      path: '/request-type'
+      fullPath: '/request-type'
+      preLoaderRoute: typeof RequestTypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/send-parcel-form': {
+      id: '/send-parcel-form'
+      path: '/send-parcel-form'
+      fullPath: '/send-parcel-form'
+      preLoaderRoute: typeof SendParcelFormRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/track-order': {
+      id: '/track-order'
+      path: '/track-order'
+      fullPath: '/track-order'
+      preLoaderRoute: typeof TrackOrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner/ads-manager': {
+      id: '/partner/ads-manager'
+      path: '/partner/ads-manager'
+      fullPath: '/partner/ads-manager'
+      preLoaderRoute: typeof PartnerAdsManagerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner/ai-builder': {
+      id: '/partner/ai-builder'
+      path: '/partner/ai-builder'
+      fullPath: '/partner/ai-builder'
+      preLoaderRoute: typeof PartnerAiBuilderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner/cloud': {
+      id: '/partner/cloud'
+      path: '/partner/cloud'
+      fullPath: '/partner/cloud'
+      preLoaderRoute: typeof PartnerCloudRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner/production': {
+      id: '/partner/production'
+      path: '/partner/production'
+      fullPath: '/partner/production'
+      preLoaderRoute: typeof PartnerProductionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner/web-designer': {
+      id: '/partner/web-designer'
+      path: '/partner/web-designer'
+      fullPath: '/partner/web-designer'
+      preLoaderRoute: typeof PartnerWebDesignerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/restaurant/$slug': {
+      id: '/restaurant/$slug'
+      path: '/restaurant/$slug'
+      fullPath: '/restaurant/$slug'
+      preLoaderRoute: typeof RestaurantSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner/production/': {
+      id: '/partner/production/'
+      path: '/'
+      fullPath: '/partner/production/'
+      preLoaderRoute: typeof PartnerProductionIndexRouteImport
+      parentRoute: typeof PartnerProductionRoute
+    }
+    '/partner/production/$store_id/menu': {
+      id: '/partner/production/$store_id/menu'
+      path: '/$store_id/menu'
+      fullPath: '/partner/production/$store_id/menu'
+      preLoaderRoute: typeof PartnerProductionStore_idMenuRouteImport
+      parentRoute: typeof PartnerProductionRoute
+    }
   }
 }
 
+interface PartnerProductionRouteChildren {
+  PartnerProductionIndexRoute: typeof PartnerProductionIndexRoute
+  PartnerProductionStore_idMenuRoute: typeof PartnerProductionStore_idMenuRoute
+}
+
+const PartnerProductionRouteChildren: PartnerProductionRouteChildren = {
+  PartnerProductionIndexRoute: PartnerProductionIndexRoute,
+  PartnerProductionStore_idMenuRoute: PartnerProductionStore_idMenuRoute,
+}
+
+const PartnerProductionRouteWithChildren =
+  PartnerProductionRoute._addFileChildren(PartnerProductionRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ClientHomeRoute: ClientHomeRoute,
+  DashboardRoute: DashboardRoute,
+  DriverControlCenterRoute: DriverControlCenterRoute,
+  DriverDashboardRoute: DriverDashboardRoute,
+  DriverHomeRoute: DriverHomeRoute,
+  FoodOrderFormRoute: FoodOrderFormRoute,
+  GroceriesRoute: GroceriesRoute,
+  LoginRoute: LoginRoute,
+  MessagesRoute: MessagesRoute,
+  OrderHistoryRoute: OrderHistoryRoute,
+  PartnerDashboardRoute: PartnerDashboardRoute,
+  PaxiFormRoute: PaxiFormRoute,
+  PaxiReceiveRoute: PaxiReceiveRoute,
+  PaxiSendRoute: PaxiSendRoute,
+  PricesRoute: PricesRoute,
+  ReceiveParcelFormRoute: ReceiveParcelFormRoute,
+  RequestTypeRoute: RequestTypeRoute,
+  ReviewsRoute: ReviewsRoute,
+  SendParcelFormRoute: SendParcelFormRoute,
+  TrackOrderRoute: TrackOrderRoute,
+  PartnerAdsManagerRoute: PartnerAdsManagerRoute,
+  PartnerAiBuilderRoute: PartnerAiBuilderRoute,
+  PartnerCloudRoute: PartnerCloudRoute,
+  PartnerProductionRoute: PartnerProductionRouteWithChildren,
+  PartnerWebDesignerRoute: PartnerWebDesignerRoute,
+  RestaurantSlugRoute: RestaurantSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
