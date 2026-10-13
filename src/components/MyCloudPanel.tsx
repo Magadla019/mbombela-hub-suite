@@ -35,7 +35,7 @@ function KeyRow({ r, reload }: { r: Row; reload: () => void }) {
 
 export function MyCloudPanel() {
   const [rows, setRows] = useState<Row[]>([]); const [err, setErr] = useState('');
-  const reload = () => { vaultStatus({ data: { token: getStaffToken() } }).then(setRows).catch((e) => setErr(e instanceof Error ? e.message : 'Could not load')); };
+  const reload = () => { if(!getStaffToken()){setErr('Partner access is not restored yet.');return;} vaultStatus({ data: { token: getStaffToken() } }).then(setRows).catch((e) => setErr(e instanceof Error ? e.message : 'Could not load')); };
   useEffect(reload, []);
   return <div className="panel p-6 md:p-7">
     <h2 className="text-xl font-bold">🔐 Secrets Vault — Partner Only</h2>
