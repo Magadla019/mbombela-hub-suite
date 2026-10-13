@@ -345,40 +345,49 @@ export type Database = {
       }
       menu_items: {
         Row: {
+          category: string | null
           category_id: string
           created_at: string
           description: string | null
           id: string
           image_url: string | null
+          in_stock: boolean
           is_available: boolean
           is_featured: boolean
           name: string
           price: number
           restaurant_id: string
+          store_id: string | null
         }
         Insert: {
+          category?: string | null
           category_id: string
           created_at?: string
           description?: string | null
           id?: string
           image_url?: string | null
+          in_stock?: boolean
           is_available?: boolean
           is_featured?: boolean
           name: string
           price?: number
           restaurant_id: string
+          store_id?: string | null
         }
         Update: {
+          category?: string | null
           category_id?: string
           created_at?: string
           description?: string | null
           id?: string
           image_url?: string | null
+          in_stock?: boolean
           is_available?: boolean
           is_featured?: boolean
           name?: string
           price?: number
           restaurant_id?: string
+          store_id?: string | null
         }
         Relationships: [
           {
@@ -391,6 +400,13 @@ export type Database = {
           {
             foreignKeyName: "menu_items_restaurant_id_fkey"
             columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "menu_items_store_id_fkey"
+            columns: ["store_id"]
             isOneToOne: false
             referencedRelation: "restaurants"
             referencedColumns: ["id"]
@@ -731,10 +747,14 @@ export type Database = {
           description: string | null
           id: string
           is_active: boolean
+          location: string | null
           logo_url: string | null
           name: string
           rating: number
+          section_id: string | null
+          section_type: string
           slug: string
+          type: string
         }
         Insert: {
           background_url?: string | null
@@ -743,10 +763,14 @@ export type Database = {
           description?: string | null
           id?: string
           is_active?: boolean
+          location?: string | null
           logo_url?: string | null
           name: string
           rating?: number
+          section_id?: string | null
+          section_type?: string
           slug: string
+          type?: string
         }
         Update: {
           background_url?: string | null
@@ -755,12 +779,24 @@ export type Database = {
           description?: string | null
           id?: string
           is_active?: boolean
+          location?: string | null
           logo_url?: string | null
           name?: string
           rating?: number
+          section_id?: string | null
+          section_type?: string
           slug?: string
+          type?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "restaurants_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "website_sections"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       reviews: {
         Row: {
