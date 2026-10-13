@@ -1,0 +1,1 @@
+export function itemIsOrderable(item:{store_id:string|null;restaurant_id:string;in_stock:boolean;is_available:boolean},storeId:string){return (item.store_id??item.restaurant_id)===storeId&&item.in_stock&&item.is_available;}
