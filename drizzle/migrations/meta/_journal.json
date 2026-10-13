@@ -64,6 +64,13 @@
       "when": 1791776107085,
       "tag": "0008_partner_secrets_vault",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1791863087885,
+      "tag": "0009_partner_website_sections",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS public.website_sections (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), section_type text NOT NULL UNIQUE, title text NOT NULL, layout_type text NOT NULL DEFAULT 'grid', card_design text NOT NULL DEFAULT 'restaurant_card', position int NOT NULL DEFAULT 0, config jsonb NOT NULL DEFAULT '{}', is_active boolean NOT NULL DEFAULT true, created_at timestamptz NOT NULL DEFAULT now());
+GRANT SELECT ON public.website_sections TO anon, authenticated;
+GRANT ALL ON public.website_sections TO service_role;
+ALTER TABLE public.website_sections ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Active website sections are public" ON public.website_sections FOR SELECT TO anon, authenticated USING(is_active);
+CREATE TABLE IF NOT EXISTS public.my_cloud_storage (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), bucket text, key text, value jsonb, file_url text, size bigint, created_at timestamptz DEFAULT now());
+GRANT ALL ON public.my_cloud_storage TO service_role;
+ALTER TABLE public.my_cloud_storage ENABLE ROW LEVEL SECURITY;
+CREATE TABLE IF NOT EXISTS public.social_connections (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), platform text NOT NULL, display_name text, status text NOT NULL DEFAULT 'disconnected', created_at timestamptz DEFAULT now());
+GRANT ALL ON public.social_connections TO service_role;
+ALTER TABLE public.social_connections ENABLE ROW LEVEL SECURITY;
+CREATE TABLE IF NOT EXISTS public.marketing_ads (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), title text NOT NULL, image_url text, format text NOT NULL DEFAULT 'image', platforms text[] NOT NULL DEFAULT '{}', status text NOT NULL DEFAULT 'draft', budget numeric NOT NULL DEFAULT 0, created_at timestamptz DEFAULT now());
+GRANT ALL ON public.marketing_ads TO service_role;
+ALTER TABLE public.marketing_ads ENABLE ROW LEVEL SECURITY;
+CREATE TABLE IF NOT EXISTS public.scheduled_ads (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), marketing_ad_id uuid REFERENCES public.marketing_ads(id), scheduled_at timestamptz, status text NOT NULL DEFAULT 'pending', created_at timestamptz DEFAULT now());
+GRANT ALL ON public.scheduled_ads TO service_role;
+ALTER TABLE public.scheduled_ads ENABLE ROW LEVEL SECURITY;
+INSERT INTO public.website_sections(section_type,title,position) VALUES ('restaurant','Restaurants',1),('grocery','Groceries Nearby',2),('ads_carousel','Ads Carousel',3) ON CONFLICT(section_type) DO NOTHING;
