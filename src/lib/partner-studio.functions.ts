@@ -22,7 +22,7 @@ export const loadStudio = createServerFn({method:'POST'}).inputValidator(d=>auth
 });
 export const saveStudioSections = createServerFn({method:'POST'}).inputValidator(d=>auth.extend({sections:z.array(sectionSchema).max(5000)}).parse(d)).handler(async({data})=>{
   const db=await partnerDb(data.token);
-  const rows=data.sections.map(s=>({...s,config:JSON.parse(JSON.stringify(s.config)) as Database['public']['Tables']['website_sections']['Insert']['config']}));
+  const rows:Database['public']['Tables']['website_sections']['Insert'][]=data.sections.map(({id,...s})=>({...s,...(id?{id}:{}),config:JSON.parse(JSON.stringify(s.config)) as Database['public']['Tables']['website_sections']['Row']['config']}));
   if(!rows.length)return {saved:0};
   const {error}=await db.from('website_sections').upsert(rows);if(error)throw new Error(error.message);return {saved:rows.length};
 });
@@ -55,8 +55,8 @@ export const cloudInventory = createServerFn({method:'POST'}).inputValidator(d=>
   return {buckets:buckets.map(b=>({id:b.id,name:b.name,created_at:b.created_at,public:b.public,file_size_limit:b.file_size_limit??null})),tables:[...tables,{name:'env_vault',count:vaultCount??0,error:vaultError?.message??null}],secrets:vaultCount??0};
 });
 export const exportStudioData = createServerFn({method:'POST'}).inputValidator(d=>auth.parse(d)).handler(async({data})=>{
-  const db=await partnerDb(data.token);const result:Record<string,unknown[]>={};
-  for(const name of safeTables){let offset=0;const rows:unknown[]=[];for(;;){const {data:page,error}=await db.from(name).select('*').order('id').range(offset,offset+499);if(error)throw new Error(error.message);rows.push(...(page??[]));if(!page||page.length<500)break;offset+=500;}result[name]=rows;}
+  const db=await partnerDb(data.token);const result:Record<string,Database['public']['Tables']['website_sections']['Row']['config'][] >={};
+  for(const name of safeTables){let offset=0;const rows:Database['public']['Tables']['website_sections']['Row']['config'][]=[];for(;;){const {data:page,error}=await db.from(name).select('*').order('id').range(offset,offset+499);if(error)throw new Error(error.message);rows.push(...(page??[]));if(!page||page.length<500)break;offset+=500;}result[name]=rows;}
   return result;
 });
 export type StudioData=Awaited<ReturnType<typeof loadStudio>>;
