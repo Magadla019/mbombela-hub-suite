@@ -44,8 +44,8 @@ export const saveStudioItem = createServerFn({method:'POST'}).inputValidator(d=>
   if(!categoryId){const {data:created,error}=await db.from('menu_categories').insert({restaurant_id:data.store_id,name:data.category}).select('id').single();if(error||!created)throw new Error(error?.message??'Could not add category.');categoryId=created.id;}
   const {token,...item}=data;const {error}=await db.from('menu_items').insert({...item,restaurant_id:data.store_id,category_id:categoryId,is_available:data.in_stock});if(error)throw new Error(error.message);return {ok:true};
 });
-export const saveMarketingDraft = createServerFn({method:'POST'}).inputValidator(d=>auth.extend({title:z.string().trim().min(1).max(150),platforms:z.array(z.enum(['tiktok','instagram','facebook','whatsapp'])),budget:z.number().min(0),image_url:z.string().nullable()}).parse(d)).handler(async({data})=>{
-  const db=await partnerDb(data.token);const {token,...row}=data;const {error}=await db.from('marketing_ads').insert({...row,status:'draft'});if(error)throw new Error(error.message);return {ok:true};
+export const saveMarketingDraft = createServerFn({method:'POST'}).inputValidator(d=>auth.extend({title:z.string().trim().min(1).max(150),platforms:z.array(z.enum(['tiktok','instagram','facebook','whatsapp'])),budget:z.number().min(0),image_url:z.string().nullable(),caption:z.string().max(2000).optional(),scheduled_for:z.string().datetime().nullable().optional(),recurring_days:z.array(z.number().int().min(0).max(6)).max(7).optional(),time:z.string().regex(/^\d{2}:\d{2}$/).optional()}).parse(d)).handler(async({data})=>{
+  const db=await partnerDb(data.token);const {token,recurring_days,time,scheduled_for,...row}=data;const recurring=!!recurring_days?.length;const rule=recurring?{days:recurring_days,time:time??'09:00'}:null;const {data:ad,error}=await db.from('marketing_ads').insert({...row,status:scheduled_for?'scheduled':'draft',scheduled_for:scheduled_for??null,publish_at:scheduled_for??null,is_recurring:recurring,recurrence_rule:rule,is_paid:row.budget>0}).select('id').single();if(!error&&ad&&scheduled_for){await db.from('scheduled_ads').insert({marketing_ad_id:ad.id,scheduled_for,recurrence:recurring?'weekly':'once',is_recurring:recurring,recurrence_rule:rule,status:'scheduled'});}if(error)throw new Error(error.message);return {ok:true};
 });
 const safeTables=['website_sections','restaurants','menu_items','ads','scheduled_ads','ai_chats','my_cloud_storage','social_connections','marketing_ads'] as const;
 export const cloudInventory = createServerFn({method:'POST'}).inputValidator(d=>auth.parse(d)).handler(async({data})=>{
@@ -61,3 +61,17 @@ export const exportStudioData = createServerFn({method:'POST'}).inputValidator(d
 });
 export type StudioData=Awaited<ReturnType<typeof loadStudio>>;
 export type StudioSection=StudioData['sections'][number];
+const platformKeys:Record<string,string[]>={facebook:['FACEBOOK_APP_ID','FACEBOOK_APP_SECRET'],instagram:['INSTAGRAM_APP_ID','INSTAGRAM_APP_SECRET'],tiktok:['TIKTOK_CLIENT_KEY','TIKTOK_CLIENT_SECRET'],youtube:['YOUTUBE_CLIENT_ID','YOUTUBE_CLIENT_SECRET'],linkedin:['LINKEDIN_CLIENT_ID','LINKEDIN_CLIENT_SECRET'],x:['X_API_KEY','X_API_SECRET'],whatsapp:['WHATSAPP_TOKEN','WHATSAPP_PHONE_ID']};
+export const addPlatform = createServerFn({method:'POST'}).inputValidator(d=>auth.extend({name:z.string().trim().min(1).max(60),description:z.string().max(300).default(''),icon_url:z.string().max(3000).nullable().default(null)}).parse(d)).handler(async({data})=>{
+  const db=await partnerDb(data.token);const slug=data.name.toLowerCase().replace(/\/twitter/,'').replace(/[^a-z0-9]+/g,'');
+  const {error}=await db.from('platforms').upsert({name:data.name,slug,description:data.description,icon_url:data.icon_url},{onConflict:'name'});if(error)throw new Error(error.message);
+  const names=platformKeys[slug]??[`${slug.toUpperCase()}_API_KEY`,`${slug.toUpperCase()}_API_SECRET`];
+  const {data:existing}=await db.from('env_vault').select('key_name').in('key_name',names);const have=new Set((existing??[]).map(r=>r.key_name));
+  const rows=names.filter(n=>!have.has(n)).map(key_name=>({key_name,platform_group:slug,description:`${data.name} publishing key`,is_active:false}));
+  if(rows.length){const {error:e}=await db.from('env_vault').insert(rows);if(e)throw new Error(e.message);}
+  return {added:rows.length};
+});
+export const listMarketing = createServerFn({method:'POST'}).inputValidator(d=>auth.parse(d)).handler(async({data})=>{
+  const db=await partnerDb(data.token);const [p,s]=await Promise.all([db.from('platforms').select('*').order('created_at'),db.from('scheduled_ads').select('*').order('scheduled_for')]);
+  return {platforms:p.data??[],schedules:s.data??[]};
+});

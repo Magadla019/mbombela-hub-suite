@@ -24,11 +24,17 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean
+          is_recurring: boolean
+          is_video: boolean
           priority: number
+          recurrence_rule: Json | null
+          scheduled_for: string | null
           target_id: string | null
           target_type: string | null
           target_url: string
+          thumbnail_url: string | null
           title: string
+          video_url: string | null
         }
         Insert: {
           category: string
@@ -39,11 +45,17 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          is_recurring?: boolean
+          is_video?: boolean
           priority?: number
+          recurrence_rule?: Json | null
+          scheduled_for?: string | null
           target_id?: string | null
           target_type?: string | null
           target_url: string
+          thumbnail_url?: string | null
           title: string
+          video_url?: string | null
         }
         Update: {
           category?: string
@@ -54,11 +66,17 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          is_recurring?: boolean
+          is_video?: boolean
           priority?: number
+          recurrence_rule?: Json | null
+          scheduled_for?: string | null
           target_id?: string | null
           target_type?: string | null
           target_url?: string
+          thumbnail_url?: string | null
           title?: string
+          video_url?: string | null
         }
         Relationships: []
       }
@@ -280,34 +298,91 @@ export type Database = {
       }
       marketing_ads: {
         Row: {
+          analytics: Json | null
+          audio_url: string | null
           budget: number
+          call_to_action: string | null
+          caption: string | null
           created_at: string | null
           format: string
+          hashtags: string | null
           id: string
           image_url: string | null
+          is_paid: boolean | null
+          is_recurring: boolean | null
+          is_web_ad: boolean | null
+          link_url: string | null
           platforms: string[]
+          product_name: string | null
+          prompt_used: string | null
+          publish_at: string | null
+          published_at: string | null
+          recurrence_rule: Json | null
+          scheduled_for: string | null
           status: string
+          thumbnail_url: string | null
           title: string
+          type: string | null
+          video_url: string | null
+          voice_url: string | null
         }
         Insert: {
+          analytics?: Json | null
+          audio_url?: string | null
           budget?: number
+          call_to_action?: string | null
+          caption?: string | null
           created_at?: string | null
           format?: string
+          hashtags?: string | null
           id?: string
           image_url?: string | null
+          is_paid?: boolean | null
+          is_recurring?: boolean | null
+          is_web_ad?: boolean | null
+          link_url?: string | null
           platforms?: string[]
+          product_name?: string | null
+          prompt_used?: string | null
+          publish_at?: string | null
+          published_at?: string | null
+          recurrence_rule?: Json | null
+          scheduled_for?: string | null
           status?: string
+          thumbnail_url?: string | null
           title: string
+          type?: string | null
+          video_url?: string | null
+          voice_url?: string | null
         }
         Update: {
+          analytics?: Json | null
+          audio_url?: string | null
           budget?: number
+          call_to_action?: string | null
+          caption?: string | null
           created_at?: string | null
           format?: string
+          hashtags?: string | null
           id?: string
           image_url?: string | null
+          is_paid?: boolean | null
+          is_recurring?: boolean | null
+          is_web_ad?: boolean | null
+          link_url?: string | null
           platforms?: string[]
+          product_name?: string | null
+          prompt_used?: string | null
+          publish_at?: string | null
+          published_at?: string | null
+          recurrence_rule?: Json | null
+          scheduled_for?: string | null
           status?: string
+          thumbnail_url?: string | null
           title?: string
+          type?: string | null
+          video_url?: string | null
+          voice_url?: string | null
         }
         Relationships: []
       }
@@ -646,6 +721,36 @@ export type Database = {
         }
         Relationships: []
       }
+      platforms: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon_url: string | null
+          id: string
+          is_active: boolean
+          name: string
+          slug: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon_url?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          slug?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon_url?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          slug?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           full_name: string | null
@@ -840,24 +945,39 @@ export type Database = {
       scheduled_ads: {
         Row: {
           created_at: string | null
+          created_by: string | null
           id: string
+          is_recurring: boolean | null
           marketing_ad_id: string | null
+          recurrence: string | null
+          recurrence_rule: Json | null
           scheduled_at: string | null
           status: string
+          web_ad_id: string | null
         }
         Insert: {
           created_at?: string | null
+          created_by?: string | null
           id?: string
+          is_recurring?: boolean | null
           marketing_ad_id?: string | null
+          recurrence?: string | null
+          recurrence_rule?: Json | null
           scheduled_at?: string | null
           status?: string
+          web_ad_id?: string | null
         }
         Update: {
           created_at?: string | null
+          created_by?: string | null
           id?: string
+          is_recurring?: boolean | null
           marketing_ad_id?: string | null
+          recurrence?: string | null
+          recurrence_rule?: Json | null
           scheduled_at?: string | null
           status?: string
+          web_ad_id?: string | null
         }
         Relationships: [
           {
@@ -865,6 +985,13 @@ export type Database = {
             columns: ["marketing_ad_id"]
             isOneToOne: false
             referencedRelation: "marketing_ads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scheduled_ads_web_ad_id_fkey"
+            columns: ["web_ad_id"]
+            isOneToOne: false
+            referencedRelation: "ads"
             referencedColumns: ["id"]
           },
         ]

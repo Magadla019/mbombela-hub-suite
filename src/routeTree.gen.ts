@@ -34,6 +34,7 @@ import { Route as TrackOrderRouteImport } from './routes/track-order'
 import { Route as PartnerAdsManagerRouteImport } from './routes/partner.ads-manager'
 import { Route as PartnerAiBuilderRouteImport } from './routes/partner.ai-builder'
 import { Route as PartnerCloudRouteImport } from './routes/partner.cloud'
+import { Route as PartnerMarketingStudioRouteImport } from './routes/partner.marketing-studio'
 import { Route as PartnerProductionRouteImport } from './routes/partner.production'
 import { Route as PartnerWebDesignerRouteImport } from './routes/partner.web-designer'
 import { Route as RestaurantSlugRouteImport } from './routes/restaurant.$slug'
@@ -165,6 +166,11 @@ const PartnerCloudRoute = PartnerCloudRouteImport.update({
   path: '/partner/cloud',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnerMarketingStudioRoute = PartnerMarketingStudioRouteImport.update({
+  id: '/partner/marketing-studio',
+  path: '/partner/marketing-studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnerProductionRoute = PartnerProductionRouteImport.update({
   id: '/partner/production',
   path: '/partner/production',
@@ -218,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/partner/ads-manager': typeof PartnerAdsManagerRoute
   '/partner/ai-builder': typeof PartnerAiBuilderRoute
   '/partner/cloud': typeof PartnerCloudRoute
+  '/partner/marketing-studio': typeof PartnerMarketingStudioRoute
   '/partner/production': typeof PartnerProductionRouteWithChildren
   '/partner/web-designer': typeof PartnerWebDesignerRoute
   '/restaurant/$slug': typeof RestaurantSlugRoute
@@ -250,6 +257,7 @@ export interface FileRoutesByTo {
   '/partner/ads-manager': typeof PartnerAdsManagerRoute
   '/partner/ai-builder': typeof PartnerAiBuilderRoute
   '/partner/cloud': typeof PartnerCloudRoute
+  '/partner/marketing-studio': typeof PartnerMarketingStudioRoute
   '/partner/web-designer': typeof PartnerWebDesignerRoute
   '/restaurant/$slug': typeof RestaurantSlugRoute
   '/partner/production': typeof PartnerProductionIndexRoute
@@ -282,6 +290,7 @@ export interface FileRoutesById {
   '/partner/ads-manager': typeof PartnerAdsManagerRoute
   '/partner/ai-builder': typeof PartnerAiBuilderRoute
   '/partner/cloud': typeof PartnerCloudRoute
+  '/partner/marketing-studio': typeof PartnerMarketingStudioRoute
   '/partner/production': typeof PartnerProductionRouteWithChildren
   '/partner/web-designer': typeof PartnerWebDesignerRoute
   '/restaurant/$slug': typeof RestaurantSlugRoute
@@ -316,6 +325,7 @@ export interface FileRouteTypes {
     | '/partner/ads-manager'
     | '/partner/ai-builder'
     | '/partner/cloud'
+    | '/partner/marketing-studio'
     | '/partner/production'
     | '/partner/web-designer'
     | '/restaurant/$slug'
@@ -348,6 +358,7 @@ export interface FileRouteTypes {
     | '/partner/ads-manager'
     | '/partner/ai-builder'
     | '/partner/cloud'
+    | '/partner/marketing-studio'
     | '/partner/web-designer'
     | '/restaurant/$slug'
     | '/partner/production'
@@ -379,6 +390,7 @@ export interface FileRouteTypes {
     | '/partner/ads-manager'
     | '/partner/ai-builder'
     | '/partner/cloud'
+    | '/partner/marketing-studio'
     | '/partner/production'
     | '/partner/web-designer'
     | '/restaurant/$slug'
@@ -412,6 +424,7 @@ export interface RootRouteChildren {
   PartnerAdsManagerRoute: typeof PartnerAdsManagerRoute
   PartnerAiBuilderRoute: typeof PartnerAiBuilderRoute
   PartnerCloudRoute: typeof PartnerCloudRoute
+  PartnerMarketingStudioRoute: typeof PartnerMarketingStudioRoute
   PartnerProductionRoute: typeof PartnerProductionRouteWithChildren
   PartnerWebDesignerRoute: typeof PartnerWebDesignerRoute
   RestaurantSlugRoute: typeof RestaurantSlugRoute
@@ -594,6 +607,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PartnerCloudRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partner/marketing-studio': {
+      id: '/partner/marketing-studio'
+      path: '/partner/marketing-studio'
+      fullPath: '/partner/marketing-studio'
+      preLoaderRoute: typeof PartnerMarketingStudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partner/production': {
       id: '/partner/production'
       path: '/partner/production'
@@ -671,6 +691,7 @@ const rootRouteChildren: RootRouteChildren = {
   PartnerAdsManagerRoute: PartnerAdsManagerRoute,
   PartnerAiBuilderRoute: PartnerAiBuilderRoute,
   PartnerCloudRoute: PartnerCloudRoute,
+  PartnerMarketingStudioRoute: PartnerMarketingStudioRoute,
   PartnerProductionRoute: PartnerProductionRouteWithChildren,
   PartnerWebDesignerRoute: PartnerWebDesignerRoute,
   RestaurantSlugRoute: RestaurantSlugRoute,

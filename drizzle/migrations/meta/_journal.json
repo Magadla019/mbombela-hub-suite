@@ -78,6 +78,13 @@
       "when": 1791863124207,
       "tag": "0010_store_section_links",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1791949568172,
+      "tag": "0011_marketing_studio_video_schedule",
+      "breakpoints": true
     }
   ]
 }
