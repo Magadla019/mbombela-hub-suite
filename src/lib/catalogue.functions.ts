@@ -13,7 +13,7 @@ function publicDb() {
  return createClient<Database>(url,key,{auth:{persistSession:false,autoRefreshToken:false},global:{fetch:(input,init)=>{const h=new Headers(init?.headers);if(key.startsWith('sb_')&&h.get('Authorization')===`Bearer ${key}`)h.delete('Authorization');h.set('apikey',key);return fetch(input,{...init,headers:h});}}});
 }
 export const publicCatalogue = createServerFn({method:'GET'}).handler(async()=>{
- const db=publicDb();const [r,c,m,a]=await Promise.all([db.from('restaurants').select('*').order('name'),db.from('menu_categories').select('*').order('sort_order'),db.from('menu_items').select('*').order('name'),db.from('ads').select('id,title,image_url,category,target_url,cta_text,priority,created_at').order('priority',{ascending:false}).order('created_at',{ascending:false})]);
+ const db=publicDb();const [r,c,m,a]=await Promise.all([db.from('restaurants').select('*').order('name'),db.from('menu_categories').select('*').order('sort_order'),db.from('menu_items').select('*').order('name'),db.from('ads').select('id,title,image_url,category,target_url,cta_text,priority,created_at,is_video,video_url,scheduled_for').or('scheduled_for.is.null,scheduled_for.lte.'+new Date().toISOString()).order('priority',{ascending:false}).order('created_at',{ascending:false})]);
  for(const result of [r,c,m,a]) if(result.error)throw new Error(result.error.message);
  return {restaurants:r.data??[],categories:c.data??[],items:m.data??[],ads:a.data??[]};
 });
