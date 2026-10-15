@@ -30,7 +30,7 @@ export const vaultTest = createServerFn({ method: 'POST' }).inputValidator((d) =
   const db = await admin(data.token);
   const key = await readKey(db, data.key_name);
   if (!key) return { ok: false, message: 'No key saved' };
-  const probes: Record<string, string> = { OPENROUTER_API_KEY: 'https://openrouter.ai/api/v1/auth/key', GROQ_API_KEY: 'https://api.groq.com/openai/v1/models', RESEND_API_KEY: 'https://api.resend.com/domains' };
+  const probes: Record<string, string> = { OPENROUTER_API_KEY: 'https://openrouter.ai/api/v1/auth/key', GROQ_API_KEY: 'https://api.groq.com/openai/v1/models', RESEND_API_KEY: 'https://api.resend.com/domains', ELEVENLABS_API_KEY: 'https://api.elevenlabs.io/v1/user' };
   const url = probes[data.key_name];
   if (!url) return { ok: true, message: 'Saved. This key is checked when you connect the account.' };
   try {
