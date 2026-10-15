@@ -45,7 +45,7 @@ export const saveStudioItem = createServerFn({method:'POST'}).inputValidator(d=>
   const {token,...item}=data;const {error}=await db.from('menu_items').insert({...item,restaurant_id:data.store_id,category_id:categoryId,is_available:data.in_stock});if(error)throw new Error(error.message);return {ok:true};
 });
 export const saveMarketingDraft = createServerFn({method:'POST'}).inputValidator(d=>auth.extend({title:z.string().trim().min(1).max(150),platforms:z.array(z.enum(['tiktok','instagram','facebook','whatsapp'])),budget:z.number().min(0),image_url:z.string().nullable(),caption:z.string().max(2000).optional(),scheduled_for:z.string().datetime().nullable().optional(),recurring_days:z.array(z.number().int().min(0).max(6)).max(7).optional(),time:z.string().regex(/^\d{2}:\d{2}$/).optional()}).parse(d)).handler(async({data})=>{
-  const db=await partnerDb(data.token);const {token,recurring_days,time,scheduled_for,...row}=data;const recurring=!!recurring_days?.length;const rule=recurring?{days:recurring_days,time:time??'09:00'}:null;const {data:ad,error}=await db.from('marketing_ads').insert({...row,status:scheduled_for?'scheduled':'draft',scheduled_for:scheduled_for??null,publish_at:scheduled_for??null,is_recurring:recurring,recurrence_rule:rule,is_paid:row.budget>0}).select('id').single();if(!error&&ad&&scheduled_for){await db.from('scheduled_ads').insert({marketing_ad_id:ad.id,scheduled_for,recurrence:recurring?'weekly':'once',is_recurring:recurring,recurrence_rule:rule,status:'scheduled'});}if(error)throw new Error(error.message);return {ok:true};
+  const db=await partnerDb(data.token);const {token,recurring_days,time,scheduled_for,caption,...row}=data;const recurring=!!recurring_days?.length;const rule=recurring?{days:recurring_days,time:time??'09:00'}:null;const {data:ad,error}=await db.from('marketing_ads').insert({...row,caption:caption??null,status:scheduled_for?'scheduled':'draft',scheduled_for:scheduled_for??null,publish_at:scheduled_for??null,is_recurring:recurring,recurrence_rule:rule,is_paid:row.budget>0}).select('id').single();if(!error&&ad&&scheduled_for){await db.from('scheduled_ads').insert({marketing_ad_id:ad.id,scheduled_at:scheduled_for,recurrence:recurring?'weekly':'once',is_recurring:recurring,recurrence_rule:rule,status:'scheduled'});}if(error)throw new Error(error.message);return {ok:true};
 });
 const safeTables=['website_sections','restaurants','menu_items','ads','scheduled_ads','ai_chats','my_cloud_storage','social_connections','marketing_ads'] as const;
 export const cloudInventory = createServerFn({method:'POST'}).inputValidator(d=>auth.parse(d)).handler(async({data})=>{
@@ -72,6 +72,6 @@ export const addPlatform = createServerFn({method:'POST'}).inputValidator(d=>aut
   return {added:rows.length};
 });
 export const listMarketing = createServerFn({method:'POST'}).inputValidator(d=>auth.parse(d)).handler(async({data})=>{
-  const db=await partnerDb(data.token);const [p,s]=await Promise.all([db.from('platforms').select('*').order('created_at'),db.from('scheduled_ads').select('*').order('scheduled_for')]);
+  const db=await partnerDb(data.token);const [p,s]=await Promise.all([db.from('platforms').select('*').order('created_at'),db.from('scheduled_ads').select('*').order('scheduled_at')]);
   return {platforms:p.data??[],schedules:s.data??[]};
 });
