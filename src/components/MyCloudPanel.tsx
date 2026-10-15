@@ -8,6 +8,8 @@ import { aiAsk, vaultDelete, vaultSave, vaultStatus, vaultTest } from '@/lib/vau
 type Row = Awaited<ReturnType<typeof vaultStatus>>[number];
 const groups: [string, string, string][] = [
   ['ai_builder', '🤖 AI Builder (required)', 'Free keys: openrouter.ai/keys and console.groq.com/keys'],
+  ['supabase', '🗄️ Supabase (required)', 'From your project → Settings → API'],
+  ['elevenlabs', '🎙️ ElevenLabs (1 key)', 'From elevenlabs.io → Profile → API Key'],
   ['tiktok', '🎵 TikTok (2 keys)', 'TikTok needs both keys to enable auto-post'],
   ['facebook_instagram', '📘 Facebook + Instagram (2 keys)', 'One Facebook App powers both Facebook Page and Instagram'],
   ['youtube', '▶️ YouTube Shorts (2 keys)', ''],
